@@ -1,0 +1,8 @@
+﻿<div>Hello this is Lifestyles</div>
+    <span *ngFor="let style of lifestyles" (click)="onSelect(style)">{{style.name}}<br/></span>
+<button (click)="add()">Add Person</button>
+<div *ngIf="selectedStyle">
+    {{selectedStyle.name}} is the name <br/>
+<input [(ngModel)]="selectedStyle.name" /><br />
+    <input [(ngModel)]="selectedStyle.lifestyle" /><button (click)="gotoDetail">View Details</button>
+    </div>
