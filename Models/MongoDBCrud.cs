@@ -17,9 +17,9 @@ namespace Lifestyles.Models
 
 		public MongoDBCrud()
 		{
-			client = new MongoClient(Configuration["MongoDB:DBServer"]);
-			db = client.GetDatabase(Configuration["MongoDB:Database"]);
-			collection = db.GetCollection<Lifestyles>(Configuration["MongoDB:Collection"]);
+			client = new MongoClient("mongodb://localhost:27017");
+			db = client.GetDatabase("admin");
+			collection = db.GetCollection<Lifestyles>("Lifestyles");
 		}
 
 		public static async void Insert(Lifestyles _file)

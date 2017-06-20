@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using Lifestyles.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -32,6 +33,7 @@ namespace Lifestyles.Controllers
         {
 			Models.Lifestyles lf = new Models.Lifestyles();
 			lf.Lifestyle = value.Lifestyle;
+			MongoDBCrud.Insert(lf);
 			var success = "SUCCESS!".ToJson();
 			JsonResult Success = new JsonResult(success);
 			return Success;
