@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Lifestyles
 {
@@ -27,10 +29,18 @@ namespace Lifestyles
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            // Add framework services.
-            services.AddMvc();
-        }
+		{
+			// Add framework services.
+			services.AddCors(options => {
+				options.AddPolicy("AllowAnyOrigin", builder => builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod());
+			});
+			// Add framework services.
+			services.AddMvc();
+			services.Configure<MvcOptions>(options => {
+				options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAnyOrigin"));
+			});
+			services.AddSingleton<IConfiguration>(Configuration);
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
