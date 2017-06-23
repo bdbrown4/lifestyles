@@ -22,7 +22,8 @@ namespace Lifestyles.Models
 			get { return Convert.ToString(_id); }
 			set { _id = MongoDB.Bson.ObjectId.Parse(value); }
 		}
-
-		public string Lifestyle { get; set; }
+        //created public property - csharp object - POCO
+        public string name { get; set; }
+		public string lifestyle { get; set; }
 	}
 }
