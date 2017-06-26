@@ -5,7 +5,7 @@ import { LifestyleService } from './lifestyle.service';
 import { Headers, Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
     selector: 'lifestyles',
@@ -19,14 +19,15 @@ export class LifestylesComponent implements OnInit {
     //lifestyles = Lifestyle[];
     //selectedStyle
     selectedStyle: Lifestyle;
+
+    //for the add method, initialization
     iName = '';
     iType = '';
     number = LIFESTYLES.length;
-    life: number;
 
 
-    private headers = new Headers({ 'Content-Type': 'application/json' });
-    private stylesUrl = 'api/styles';  // URL to web api
+    //setting up get values
+ styles: Lifestyle[];
 
     //onSelect object - class, this.selectedStyle will equal style element
     onSelect(style: Lifestyle): void {
@@ -36,7 +37,6 @@ export class LifestylesComponent implements OnInit {
     //constructor to  make lifeService private store Service
     //constructor(public lifeService: LifestyleService) { }
     constructor( private lifestyleService: LifestyleService
-    //    private styleService: LifestyleService
     ) { }
 
     //add method
@@ -49,13 +49,17 @@ export class LifestylesComponent implements OnInit {
         this.lifestyleService.addName( this.iName, this.iType);
     }
 
-    getStyle(): void {
-       //this.styleService
-            //.getStyle()
-           // .then(style => this.lifestyles = style);
+
+    //create an array
+    names: Array<string>;
+
+    ngOnInit(){
+        this.getNames();
     }
-    //ngOnInit
-    ngOnInit(): void {
-        this.getStyle();
+
+    getNames(): Observable<string[]> {
+        this.lifestyleService.getNamesFromService().subscribe(names => this.names = names);
+        return ;
     }
+
 }

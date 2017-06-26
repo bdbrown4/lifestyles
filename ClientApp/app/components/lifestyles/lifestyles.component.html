@@ -12,3 +12,6 @@
         <input [(ngModel)]="selectedStyle.name" /><br />
         <input [(ngModel)]="selectedStyle.lifestyle" /><button (click)="gotoDetail">View Details</button>
     </div>
+<h1>List of Names from DB</h1>
+<span *ngFor="let s of names">Name:{{s.name}} <br/> <b>Lifestyle: </b> {{s.lifestyle}}<br /></span>
+

@@ -1,4 +1,4 @@
 ﻿export class Lifestyle {
-    name: string;
-    lifestyle: string;
+    constructor(public name: string,
+        public lifestyle: string) { }
 }

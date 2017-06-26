@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Driver;
 using Lifestyles.Models;
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,18 +17,30 @@ namespace Lifestyles.Controllers
     public class LifeStyleController : Controller
     {
         // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("/lifestyles/api")] //make sure to add a path
+        public async Task<JsonResult> GetNames()
         {
-            return new string[] { "value1", "value2" };
-        }
+            //Connect to db, get collection
 
+            Lifestyles.Models.MongoDBCrud mongo = new MongoDBCrud();
+            List<string> obj = new List<string>();
+            var query = mongo.collection.Find(Builders<Models.Lifestyles>.Filter.Empty).ToListAsync();
+            await query;
+           
+           //obj.Add("Demetre Phipps");
+         // obj.Add("Ben Brown");
+
+        //var filter = Builders<Models.Lifestyles>.Filter.Regex("name", new BsonRegularExpression(".*", "i"));
+            return Json(query.Result != null ? query.Result.ToArray() : new List<Models.Lifestyles>().ToArray());
+
+        }
+        /*
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string lname)
         {
-            return "value";
-        }
+            return lname;
+        }*/
 
         // POST api/values
         [HttpPost("/lifestyles/api")]

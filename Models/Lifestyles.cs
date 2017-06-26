@@ -10,6 +10,8 @@ namespace Lifestyles.Models
 {
     public class Lifestyles
     {
+
+        
 		public static IConfiguration Configuration { get; set; }
 
 		//id changed to ObjectId type so mongo's generated ids can be used
