@@ -49,14 +49,32 @@ namespace Lifestyles.Controllers
 			Models.Lifestyles lf = new Models.Lifestyles();
 			lf.lifestyle = value.lifestyle;
             lf.name = value.name;
-
-            MongoDBCrud.Insert(lf);
-
+            if (lf.lifestyle!="" && lf.name!="") {
+                MongoDBCrud.Insert(lf);
+            }
             
 
             var success = "SUCCESS!".ToJson();
 			JsonResult Success = new JsonResult(success);
 			return Success;
+        }
+        // POST api/values
+        [HttpPost("/lifestyles/delete")]
+        public async Task<JsonResult> Delete([FromBody]Models.Lifestyles value)
+        {
+            Models.Lifestyles delete = new Models.Lifestyles();
+            delete.lifestyle = value.lifestyle;
+            delete.name = value.name;
+            delete.id = value.id;
+
+            MongoDBCrud.DeleteAsync(delete.id);
+
+
+
+            var success = "SUCCESS!".ToJson();
+            JsonResult Success = new JsonResult(success);
+            return Success;
+            //MongoDBCrud.Delete(delete);
         }
 
         // PUT api/values/5
@@ -66,8 +84,8 @@ namespace Lifestyles.Controllers
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("lifestyles/delete")]
+        public void Delete()
         {
         }
     }

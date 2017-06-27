@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace Lifestyles.Models
 {
@@ -27,5 +28,32 @@ namespace Lifestyles.Models
 			MongoDBCrud mongo = new MongoDBCrud();
 			await mongo.collection.InsertOneAsync(_file);
 		}
-	}
+
+        public static async void DeleteAsync(string Id)
+        {
+            var oid = MongoDB.Bson.ObjectId.Parse(Id);
+            //var name = MongoDB.Bson.ObjectId.Parse(delete);
+            MongoDBCrud mongo = new MongoDBCrud();
+            var filter = Builders<Lifestyles>.Filter.Eq(Lifestyles => Lifestyles._id, oid);
+            await mongo.collection.DeleteManyAsync(filter);
+
+        }
+
+        internal static void DeleteAsync(Lifestyles delete)
+        {
+            throw new NotImplementedException();
+        }
+
+        /* public static async void Delete(Lifestyles _file)
+         {
+             MongoDBCrud mongo = new MongoDBCrud();
+             await mongo.collection.DeleteOne("name", _file );
+
+
+                 //.DeleteOneAsync(_file);
+
+
+                 //.InsertOneAsync(_file);
+         }*/
+    }
 }

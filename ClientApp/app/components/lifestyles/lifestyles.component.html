@@ -5,13 +5,18 @@
 <button (click)="add(pName.value, ltype.value);">Add</button>
 <span *ngIf="iName!=''">{{iName}} {{iType}} <br /> </span>
 <br/>
-    <span *ngFor="let style of lifestyles" (click)="onSelect(style)">{{style.name}}<br /></span>
-<br/> Number of array {{life}}
-    <div *ngIf="selectedStyle">
-        {{selectedStyle.name}} is the name <br />
-        <input [(ngModel)]="selectedStyle.name" /><br />
-        <input [(ngModel)]="selectedStyle.lifestyle" /><button (click)="gotoDetail">View Details</button>
-    </div>
-<h1>List of Names from DB</h1>
-<span *ngFor="let s of names">Name:{{s.name}} <br/> <b>Lifestyle: </b> {{s.lifestyle}}<br /></span>
+   <!--<span *ngFor="let style of lifestyles" >{{style.name}}<br /></span><br/> Number of array {{life}}--> 
 
+
+<h1>List of Names from DB</h1>
+<div *ngFor="let s of names" ><span style="background-color:aquamarine;"(click)="onSelect(s)">Name:{{s.name}} <br /> <b>Lifestyle: </b> {{s.lifestyle}} </span><button (click)="deleteName(s.name, s.lifestyle, s.id)">Delete</button><br /></div>
+<div *ngIf="selectedStyle">
+    {{selectedStyle.name}} is the name <br />
+    <input [(ngModel)]="selectedStyle.name" #Name /><br />
+    
+    <input [(ngModel)]="selectedStyle.lifestyle" #lifestyle />
+    <input [(ngModel)]="selectedStyle.id" #Id/>
+    <button (click)="deleteName(Name.value, lifestyle.value, Id.value)" >Delete</button>
+   
+</div>
+<span *ngIf="dName!=''">{{dName}}  {{dStyle}} {{dId}}</span>

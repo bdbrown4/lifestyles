@@ -25,8 +25,8 @@ export class LifestyleService {
 
   //add method
   addName(name: string, lifestyle: string): void {
-      var myRouter = this.router;
-      var header = new Headers();
+     // var myRouter = this.router;
+    //  var header = new Headers();
 
    /*Unnsupported Media Type
 
@@ -39,6 +39,22 @@ export class LifestyleService {
           .subscribe(data => { console.log(data) });
 
     }
+
+  removeName(name: string, lifestyle: string, id: string): void {
+      // var myRouter = this.router;
+      //  var header = new Headers();
+      this.http
+          //.delete("lifestyles/api")
+          .post("/lifestyles/delete", { name: name, lifestyle: lifestyle, id: id } )
+         /* .map((res: Response) => {
+              let body = <string[]>res.json();
+              return body;
+          });*/
+      .subscribe(data => { console.log(data) }); //need subscribe
+
+  }
+
+
   getNamesFromService(): Observable<string[]> {
       return this.http
           .get("/lifestyles/api")

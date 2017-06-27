@@ -25,6 +25,10 @@ export class LifestylesComponent implements OnInit {
     iType = '';
     number = LIFESTYLES.length;
 
+    //live in delete
+    dName = '';
+    dStyle = '';
+    dId = '';
 
     //setting up get values
  styles: Lifestyle[];
@@ -36,7 +40,7 @@ export class LifestylesComponent implements OnInit {
       
     //constructor to  make lifeService private store Service
     //constructor(public lifeService: LifestyleService) { }
-    constructor( private lifestyleService: LifestyleService
+    constructor(private lifestyleService: LifestyleService, private router: Router
     ) { }
 
     //add method
@@ -46,7 +50,8 @@ export class LifestylesComponent implements OnInit {
         this.iName = name.trim();
         this.iType = lifestyle.trim();
 
-        this.lifestyleService.addName( this.iName, this.iType);
+        this.lifestyleService.addName(this.iName, this.iType);
+        this.router.navigate['./home'];
     }
 
 
@@ -60,6 +65,14 @@ export class LifestylesComponent implements OnInit {
     getNames(): Observable<string[]> {
         this.lifestyleService.getNamesFromService().subscribe(names => this.names = names);
         return ;
+    }
+
+    deleteName(name: string, lifestyle: string, id: string): void {
+        this.dName = name.trim();
+        this.dStyle = lifestyle.trim();
+        this.dId = id.trim();
+        this.lifestyleService.removeName(this.dName, this.dStyle, this.dId);
+        this.router.navigate['/lifestyles'];
     }
 
 }
