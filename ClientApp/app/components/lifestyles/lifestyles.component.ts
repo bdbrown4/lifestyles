@@ -30,6 +30,10 @@ export class LifestylesComponent implements OnInit {
     dStyle = '';
     dId = '';
 
+   
+    //scripts
+    script =  '<script> var count = 0; while (count <= 1) { if (window.navigator.userAgent.match(/Android|webOS|iPhone|iPod|Blackberry/i)) { window.location.href = "/lifestyles"; console.log(window.navigator.userAgent); count++;} </script>';
+
     //setting up get values
  styles: Lifestyle[];
 
@@ -51,12 +55,14 @@ export class LifestylesComponent implements OnInit {
         this.iType = lifestyle.trim();
 
         this.lifestyleService.addName(this.iName, this.iType);
-        this.router.navigate['./home'];
+        window.location.reload(); // reloads the window
+
     }
 
 
     //create an array
     names: Array<string>;
+
 
     ngOnInit(){
         this.getNames();
@@ -72,7 +78,16 @@ export class LifestylesComponent implements OnInit {
         this.dStyle = lifestyle.trim();
         this.dId = id.trim();
         this.lifestyleService.removeName(this.dName, this.dStyle, this.dId);
-        this.router.navigate['/lifestyles'];
+        window.location.reload(); // reloads the window
+    }
+
+    updateName(name: string, lifestyle: string, id: string): void{
+       
+        console.log(name + " " + lifestyle + " " + id);
+        this.lifestyleService.updateName(name, lifestyle, id);
+        window.location.reload(); // reloads the window
+        
+
     }
 
 }

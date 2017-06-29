@@ -39,7 +39,28 @@ namespace Lifestyles.Models
 
         }
 
+        public static async void UpdateAsync(string Id, string name, string lifestyle)
+        {
+            var oid = MongoDB.Bson.ObjectId.Parse(Id);
+            //var name = MongoDB.Bson.ObjectId.Parse(delete);
+            MongoDBCrud mongo = new MongoDBCrud();
+            var filter = Builders<Lifestyles>.Filter.Eq(Lifestyles => Lifestyles._id, oid);
+            //update name
+            var update = Builders<Lifestyles>.Update.Set(Lifestyles => Lifestyles.name, name);
+            var updateTask = mongo.collection.UpdateOneAsync(filter, update);
+            await updateTask;
+            //update lifestyle
+            update = Builders<Lifestyles>.Update.Set(Lifestyles => Lifestyles.lifestyle, lifestyle);
+            updateTask = mongo.collection.UpdateOneAsync(filter, update);
+            await updateTask;
+        }
+
         internal static void DeleteAsync(Lifestyles delete)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void UpdateAsync(Lifestyles lf)
         {
             throw new NotImplementedException();
         }

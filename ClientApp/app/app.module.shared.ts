@@ -10,10 +10,9 @@ import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { LifestylesComponent } from './components/lifestyles/lifestyles.component';
 import { LifestyleService } from './components/lifestyles/lifestyle.service';
-
-
+import { LifestyleUpdate } from './components/lifestyles/lifestlyle-update';
 // Imports for loading & configuring the in-memory web api
-import { InMemoryDataService } from './components/lifestyles/in-memory-data.service';
+//import { InMemoryDataService } from './components/lifestyles/in-memory-data.service';
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -23,17 +22,20 @@ export const sharedConfig: NgModule = {
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        LifestylesComponent
+        LifestylesComponent,
+        LifestyleUpdate
     ],
     imports: [
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'lifestyleUpdate/:name', component: LifestyleUpdate },
             { path: 'home', component: HomeComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'lifestyles', component: LifestylesComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: '*', redirectTo: 'lifestyles' }
+            
         ])
     ],
     providers: [LifestyleService]

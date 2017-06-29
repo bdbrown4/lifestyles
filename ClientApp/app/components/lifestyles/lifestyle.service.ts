@@ -13,7 +13,7 @@ import 'rxjs/add/operator/toPromise';
 export class LifestyleService {
 
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    stylesUrl = '/lifestyles/api';  // URL to web api
+    stylesUrl = 'http://localhost:60977/lifestyles/api';  // URL to web api
 
     constructor(private http: Http, private router: Router) { }
 
@@ -35,7 +35,7 @@ export class LifestyleService {
       formData.append('lifestyle', lifestyle);
       */ 
       this.http
-          .post("/lifestyles/api", { name: name, lifestyle: lifestyle })
+          .post("http://localhost:60977/lifestyles/api", { name: name, lifestyle: lifestyle })
           .subscribe(data => { console.log(data) });
 
     }
@@ -45,7 +45,7 @@ export class LifestyleService {
       //  var header = new Headers();
       this.http
           //.delete("lifestyles/api")
-          .post("/lifestyles/delete", { name: name, lifestyle: lifestyle, id: id } )
+          .post("http://localhost:60977/lifestyles/delete", { name: name, lifestyle: lifestyle, id: id } )
          /* .map((res: Response) => {
               let body = <string[]>res.json();
               return body;
@@ -57,10 +57,16 @@ export class LifestyleService {
 
   getNamesFromService(): Observable<string[]> {
       return this.http
-          .get("/lifestyles/api")
+          .get("http://localhost:60977/lifestyles/api")
           .map((res: Response) => {
               let body = <string[]>res.json();
               return body;
           });
+  }
+
+  updateName(name: string, lifestyle: string, id: string): void {
+      this.http
+          .post("lifestyles/update", { name: name, lifestyle: lifestyle, id: id })
+          .subscribe(data => { console.log(data) }); //need subscribe
   }
 }

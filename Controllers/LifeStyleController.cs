@@ -58,6 +58,26 @@ namespace Lifestyles.Controllers
 			JsonResult Success = new JsonResult(success);
 			return Success;
         }
+
+        // POST api/values
+        [HttpPost("/lifestyles/update")]
+        public async Task<JsonResult> UpdateName([FromBody]Models.Lifestyles value)
+        {
+            Models.Lifestyles update = new Models.Lifestyles();
+            update.lifestyle = value.lifestyle;
+            update.name = value.name;
+            update.id = value.id;
+            if (update.lifestyle != "" && update.name != "")
+            {
+                MongoDBCrud.UpdateAsync(update.id, update.name, update.lifestyle);
+            }
+
+
+            var success = "SUCCESS!".ToJson();
+            JsonResult Success = new JsonResult(success);
+            return Success;
+        }
+
         // POST api/values
         [HttpPost("/lifestyles/delete")]
         public async Task<JsonResult> Delete([FromBody]Models.Lifestyles value)
