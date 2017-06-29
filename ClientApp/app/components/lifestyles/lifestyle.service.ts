@@ -3,7 +3,6 @@ import { LIFESTYLES } from './mock-lifestyles';
 import { Injectable, Inject } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Subject, Observable } from 'rxjs';
-import { ListResult } from '../service/list-result.interface';
 import { Router } from '@angular/router';
 import 'rxjs/Rx'; // make sure 
 @Injectable() // tells typescript to emit metadata about the service
