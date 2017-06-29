@@ -1,8 +1,8 @@
-﻿<div>Hello this is Lifestyles<br/></div>
-<h1>Lifestyles Count: {{number}}</h1>
-<label>Name: </label> <input #pName /><br/>
-<label>Lifestyle Type </label><input #ltype />
-<button (click)="add(pName.value, ltype.value);">Add</button>
+﻿<h1 style="background-color:brown; padding:2%; color:greenyellow;">Lifestyles</h1>
+<!--<h1>Lifestyles Count: {{number}}</h1>-->
+ <input style="height:50px; width:40%;" #pName placeholder="Name" /><br/>
+<input style="height:50px; width:40%;"  #ltype placeholder="Lifestyle type"/><br />
+<button style="height:50px; width:40%;" (click)="add(pName.value, ltype.value);">Add</button>
 <span *ngIf="iName!=''">{{iName}} {{iType}} <br /> </span>
 
 <h1>Flanders IT Programming</h1>

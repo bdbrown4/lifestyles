@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "14c694f6d70645860f12"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "00280f5bc310269dee1f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -5350,7 +5350,7 @@ module.exports = "  User Agent \r\n<a>Lifestyles</a>\r\n<br />\r\n<h1>Hello, wor
 /* 88 */
 /***/ (function(module, exports) {
 
-module.exports = "<div>Hello this is Lifestyles<br/></div>\r\n<h1>Lifestyles Count: {{number}}</h1>\r\n<label>Name: </label> <input #pName /><br/>\r\n<label>Lifestyle Type </label><input #ltype />\r\n<button (click)=\"add(pName.value, ltype.value);\">Add</button>\r\n<span *ngIf=\"iName!=''\">{{iName}} {{iType}} <br /> </span>\r\n\r\n<h1>Flanders IT Programming</h1>\r\n<div *ngFor=\"let s of names\" style=\"background-color:aquamarine; width:20%; margin-bottom:10px;\" ><a  (click)=\"onSelect(s)\" style=\"display:inline-block; width:70%; cursor:pointer;\">Name:{{s.name}} <br /> <b>Lifestyle: </b> {{s.lifestyle}} </a><div style=\"display:inline-block; width:30%; vertical-align:top; text-align:right;\"><button (click)=\"deleteName(s.name, s.lifestyle, s.id)\">X</button></div></div>\r\n<div *ngIf=\"selectedStyle\">\r\n    {{selectedStyle.name}} is the name <br />\r\n    <input [(ngModel)]=\"selectedStyle.name\" #Name /><br />\r\n\r\n    <input [(ngModel)]=\"selectedStyle.lifestyle\" #lifestyle />\r\n    <input style=\"display:none;\" [(ngModel)]=\"selectedStyle.id\" #Id />\r\n    <button (click)=\"updateName(Name.value, lifestyle.value, Id.value)\">Update</button>\r\n\r\n</div>\r\n<span *ngIf=\"dName!=''\">{{dName}}  {{dStyle}} {{dId}}</span>\r\n<!--\"-->";
+module.exports = "<h1 style=\"background-color:brown; padding:2%; color:greenyellow;\">Lifestyles</h1>\r\n<!--<h1>Lifestyles Count: {{number}}</h1>-->\r\n <input style=\"height:50px; width:40%;\" #pName placeholder=\"Name\" /><br/>\r\n<input style=\"height:50px; width:40%;\"  #ltype placeholder=\"Lifestyle type\"/><br />\r\n<button style=\"height:50px; width:40%;\" (click)=\"add(pName.value, ltype.value);\">Add</button>\r\n<span *ngIf=\"iName!=''\">{{iName}} {{iType}} <br /> </span>\r\n\r\n<h1>Flanders IT Programming</h1>\r\n<div *ngFor=\"let s of names\" style=\"background-color:aquamarine; width:20%; margin-bottom:10px;\" ><a  (click)=\"onSelect(s)\" style=\"display:inline-block; width:70%; cursor:pointer;\">Name:{{s.name}} <br /> <b>Lifestyle: </b> {{s.lifestyle}} </a><div style=\"display:inline-block; width:30%; vertical-align:top; text-align:right;\"><button (click)=\"deleteName(s.name, s.lifestyle, s.id)\">X</button></div></div>\r\n<div *ngIf=\"selectedStyle\">\r\n    {{selectedStyle.name}} is the name <br />\r\n    <input [(ngModel)]=\"selectedStyle.name\" #Name /><br />\r\n\r\n    <input [(ngModel)]=\"selectedStyle.lifestyle\" #lifestyle />\r\n    <input style=\"display:none;\" [(ngModel)]=\"selectedStyle.id\" #Id />\r\n    <button (click)=\"updateName(Name.value, lifestyle.value, Id.value)\">Update</button>\r\n\r\n</div>\r\n<span *ngIf=\"dName!=''\">{{dName}}  {{dStyle}} {{dId}}</span>\r\n<!--\"-->";
 
 /***/ }),
 /* 89 */
