@@ -13,9 +13,7 @@ import { sharedConfig } from './app.module.shared';
         HttpModule,
         ...sharedConfig.imports
     ],
-    providers: [
-        { provide: 'ORIGIN_URL', useValue: location.origin }
-    ]
+    providers: [{ provide: 'ORIGIN_URL', useValue: location.origin }]
 })
 export class AppModule {
 }

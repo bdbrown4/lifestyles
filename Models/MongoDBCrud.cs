@@ -34,6 +34,7 @@ namespace Lifestyles.Models
             var oid = MongoDB.Bson.ObjectId.Parse(Id);
             //var name = MongoDB.Bson.ObjectId.Parse(delete);
             MongoDBCrud mongo = new MongoDBCrud();
+            //filter by the id that is passed through. 
             var filter = Builders<Lifestyles>.Filter.Eq(Lifestyles => Lifestyles._id, oid);
             await mongo.collection.DeleteManyAsync(filter);
 
@@ -44,6 +45,7 @@ namespace Lifestyles.Models
             var oid = MongoDB.Bson.ObjectId.Parse(Id);
             //var name = MongoDB.Bson.ObjectId.Parse(delete);
             MongoDBCrud mongo = new MongoDBCrud();
+            //filter by the id only
             var filter = Builders<Lifestyles>.Filter.Eq(Lifestyles => Lifestyles._id, oid);
             //update name
             var update = Builders<Lifestyles>.Update.Set(Lifestyles => Lifestyles.name, name);

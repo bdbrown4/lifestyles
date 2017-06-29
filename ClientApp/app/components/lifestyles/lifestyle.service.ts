@@ -1,72 +1,53 @@
 ﻿import { Lifestyle } from './lifestyle';
 import { LIFESTYLES } from './mock-lifestyles';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Subject, Observable } from 'rxjs';
 import { ListResult } from '../service/list-result.interface';
 import { Router } from '@angular/router';
 import 'rxjs/Rx'; // make sure 
-
-import 'rxjs/add/operator/toPromise';
-
 @Injectable() // tells typescript to emit metadata about the service
 export class LifestyleService {
-
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    stylesUrl = 'http://localhost:60977/lifestyles/api';  // URL to web api
-
-    constructor(private http: Http, private router: Router) { }
-
+    constructor(private http: Http, private router: Router, @Inject('ORIGIN_URL') private originUrl: string) { }
     iName = '';
     iType = '';
-
-
-
-
-  //add method
-  addName(name: string, lifestyle: string): void {
-     // var myRouter = this.router;
-    //  var header = new Headers();
-
-   /*Unnsupported Media Type
-
-      let formData: FormData = new FormData();
-      formData.append('name', name);
-      formData.append('lifestyle', lifestyle);
-      */ 
-      this.http
-          .post("http://localhost:60977/lifestyles/api", { name: name, lifestyle: lifestyle })
-          .subscribe(data => { console.log(data) });
-
+    private handleError(error: any): Promise<any> {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
     }
-
-  removeName(name: string, lifestyle: string, id: string): void {
-      // var myRouter = this.router;
-      //  var header = new Headers();
-      this.http
-          //.delete("lifestyles/api")
-          .post("http://localhost:60977/lifestyles/delete", { name: name, lifestyle: lifestyle, id: id } )
-         /* .map((res: Response) => {
-              let body = <string[]>res.json();
-              return body;
-          });*/
-      .subscribe(data => { console.log(data) }); //need subscribe
-
-  }
-
-
-  getNamesFromService(): Observable<string[]> {
-      return this.http
-          .get("http://localhost:60977/lifestyles/api")
-          .map((res: Response) => {
-              let body = <string[]>res.json();
-              return body;
-          });
-  }
-
-  updateName(name: string, lifestyle: string, id: string): void {
-      this.http
-          .post("lifestyles/update", { name: name, lifestyle: lifestyle, id: id })
-          .subscribe(data => { console.log(data) }); //need subscribe
-  }
+    //add method
+    addName(name: string, lifestyle: string): Observable<any> {
+        let stylesUrl = '/lifestyles/api';  // URL to web api
+        return this.http
+            .post(this.originUrl + stylesUrl, { name: name, lifestyle: lifestyle })
+            .catch(this.handleError);
+    }
+    removeName(name: string, lifestyle: string, id: string): Observable<any> {
+        let stylesUrl = "/lifestyles/delete";
+        return this.http
+            //.delete("lifestyles/api")
+            .post(this.originUrl + stylesUrl, { name: name, lifestyle: lifestyle, id: id })
+            .catch(this.handleError);
+        /* .map((res: Response) => {
+             let body = <string[]>res.json();
+             return body;
+         });*///need subscribe
+    }
+    getNamesFromService(): Observable<string[]> {
+        let stylesUrl = '/lifestyles/api';  // URL to web ap
+        return this.http
+            .get(this.originUrl + stylesUrl)
+            .map((res: Response) => {
+                let body = <string[]>res.json();
+                return body;
+            })
+            .catch(this.handleError);
+    }
+    updateName(name: string, lifestyle: string, id: string): Observable<any> {
+        let stylesUrl = "/lifestyles/update";
+        return this.http
+            .post(this.originUrl + stylesUrl, { name: name, lifestyle: lifestyle, id: id })
+            .catch(this.handleError); //need subscribe
+    }
 }
